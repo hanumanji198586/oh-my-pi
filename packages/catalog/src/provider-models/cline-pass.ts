@@ -34,6 +34,24 @@ const LOW_TO_MAX: ThinkingConfig = {
 	requiresEffort: false,
 };
 
+const LOW_MEDIUM_HIGH: ThinkingConfig = {
+	mode: "effort",
+	efforts: [Effort.Low, Effort.Medium, Effort.High],
+	defaultLevel: Effort.Medium,
+	requiresEffort: false,
+};
+
+const STEP_5_PREVIEW_FREE: ClinePassModelMetadata = {
+	name: "Step 5 Preview (free)",
+	contextWindow: 1_000_000,
+	maxTokens: 64_000,
+	input: ["text", "image"],
+	cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+	reasoning: true,
+	thinking: LOW_MEDIUM_HIGH,
+	tier: "free",
+};
+
 const QWEN_38_EFFORTS: ThinkingConfig = {
 	mode: "effort",
 	efforts: [Effort.Minimal, Effort.Low, Effort.Medium, Effort.High, Effort.XHigh],
@@ -219,6 +237,8 @@ export const CLINE_PASS_MODEL_METADATA: Readonly<Record<string, ClinePassModelMe
 		reasoning: true,
 		tier: "free",
 	},
+	"cline-free/step-5-preview": STEP_5_PREVIEW_FREE,
+	"stepfun/step-5-preview": STEP_5_PREVIEW_FREE,
 };
 
 export function getClinePassModelMetadata(id: string): ClinePassModelMetadata | undefined {
